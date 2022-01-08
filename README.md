@@ -6,6 +6,7 @@
 		* Spring Boot 2.6.2
 		* Java 11
 		* JPA
+		* H2 Database in memory
 		* Lombook
 		* Gradle 7.3.2
 		* JUnit 5
@@ -15,6 +16,8 @@
 	
 		- Se utilizó SonarLint para asegurabilidad de código limpio, buenas prácticas en las rutinas y cero CodeSmells. El reporte quedó al 100% (0 Issues)
 		- De acuerdo al tiempo para esta prueba se logró alcanzar un 63,2% de Coverage es Tests
+		- Conforme el requerimiento de la prueba, se dotó el servicio con una base de datos H2 en Memoria para el almacenamiento de la información. De esta
+		  manera, cada vez que inicie el servicio, la bd estará limpia.
 		
 	Guía de instalación (Usando Eclipse como ejemplo)
 
