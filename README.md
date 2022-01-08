@@ -37,6 +37,12 @@
 		LISTENER TRANSACTION AUTHORIZER UP
 		**********************************		
 		
+		Adicionalmente se le invita a que ingrese lineas json mediante el siguiente texto:
+		
+			ENTER ANY JSON FROM TRANSACTION (Or Write 'exit' and press Enter to finish)
+			
+		Este mensaje saldrá cada vez que procese una linea json, para que pueda finalizar la prueba cuando desee.
+		
 		A partir de allí puede insertar las lineas con las estructuras json definidas para las Cuentas y las Transacciones. A continuación, comparto
 		un set de peticiones en la que se puede observar las distintas respuestas según las reglas de negocio para el microservicio:
 		
@@ -51,7 +57,21 @@
 		{"account": {"id": 2, "active-card": false, "available-limit": 100}}
 		{"transaction": {"merchant": "Burger King 4","amount": 50, "time":"2019-02-13T10:03:00.000Z"}}
 		
-		En el momento que desee puede digitar la palabra EXIT y presionar Enter para detener el Listener de las transacciones. El sistema arrojará una respuestas
+		Tras presionar Enter para lanzar todo este bloque de pruebas, las respuestas serían las siguientes:
+		
+		Response: {"account":{"active-card":true,"available-limit":100},"violations":[]}
+		Response: {"account":{"active-card":true,"available-limit":100},"violations":["account-already-initialized"]}
+		Response: {"account":{"active-card":true,"available-limit":80},"violations":[]}
+		Response: {"account":{"active-card":true,"available-limit":80},"violations":["doubled-transaction"]}
+		Response: {"account":{"active-card":true,"available-limit":60},"violations":[]}
+		Response: {"account":{"active-card":true,"available-limit":40},"violations":[]}
+		Response: {"account":{"active-card":true,"available-limit":40},"violations":["high-frequency-small-interval"]}
+		Response: {"account":{"active-card":true,"available-limit":40},"violations":["insufficient-limit"]}		
+		Response: {"account":{"active-card":false,"available-limit":100},"violations":[]}		
+		Response: {"account":{"active-card":null,"available-limit":null},"violations":["card-not-active"]}
+		
+		
+		En el momento que desee puede digitar la palabra EXIT y presionar Enter para detener el Listener de las transacciones. El sistema arrojará una respuesta
 		como se observa a continuación:
 		
 		**************************************
